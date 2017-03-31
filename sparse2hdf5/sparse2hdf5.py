@@ -50,7 +50,4 @@ def hdf52sparse(name,
     '''
 
     '''
-    return eval(matrix_type(matrix) + '_matrix_from_hdf5')(name,
-                                                           hdf5root,
-                                                           group,
-                                                           mode)
+    raise NotImplementedError
