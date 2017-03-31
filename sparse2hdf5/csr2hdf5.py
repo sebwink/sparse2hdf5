@@ -1,7 +1,7 @@
 import h5py 
 import scipy.sparse 
 
-from . __common__ import sparse_matrix_to_hdf5, sparse_matrix_from_hdf5
+from . generic import sparse_matrix_to_hdf5, sparse_matrix_from_hdf5
 
 __csr_repr__ = ['data', 'indices', 'indptr']
 

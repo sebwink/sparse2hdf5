@@ -68,15 +68,17 @@ def sparse_matrix_to_hdf5(matrix,
         for array_name in representation:
             __insert_data(MATRIX, matrix, array_name)
 
-def sparse_matrix_from_hdf5(name, 
+def sparse_matrix_from_hdf5(name,
                             hdf5root,
                             group,
                             mode,
                             matrix_type,
-                            representation):
+                            representation,
+                            tupleization = False):
     '''
     Get a sparse matrix from a HDF5 dataset.
     '''
+
     with h5py.File(hdf5root, mode) as HDF5ROOT:
         GROUP = __get_group_out(HDF5ROOT, group)
         MATRIX = __get_matrix_out(GROUP, name)
