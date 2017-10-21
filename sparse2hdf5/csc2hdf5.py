@@ -1,37 +1,42 @@
-import h5py 
-import scipy.sparse 
+import h5py
+import scipy.sparse
 
-from . generic import sparse_matrix_to_hdf5, sparse_matrix_from_hdf5
+from sparse2hdf5.generic import sparse_matrix_to_hdf5, sparse_matrix_from_hdf5
 
 __csc_repr__ = ['data', 'indices', 'indptr']
 
 def csc_matrix_to_hdf5(matrix,
-                       name,
-                       hdf5root,
-                       attrs = {}
-                       group = None,
-                       mode = 'a') 
+                       path,
+                       group=None,
+                       name=None,
+                       attrs={},
+                       mode='a',
+                       file_kwargs={},
+                       create_dataset_kwargs={}):
     '''
     Store a sparse matrix in csc format as a HDF5 dataset.
     '''
-    sparse_matrix_to_hdf5(matrix,
-                          name,
-                          hdf5root,
+    sparse_matrix_to_hdf5(matrixi,
+                          'csc',
+                          __csc_repr__,
+                          path,
                           group,
+                          name,
+                          attrs,
                           mode,
-                          matrix_type = 'csc',
-                          representation = __csc_repr__)
+                          file_kwargs,
+                          create_dataset_kwargs)
 
-def csc_matrix_from_hdf5(name,
-                         hdf5root,
-                         group = None,
-                         mode = 'a'):
+def csc_matrix_from_hdf5(path,
+                         name=None,
+                         group=None,
+                         mode='a'):
     '''
     Get a sparse matrix in csr format from a HDF5 dataset.
     '''
-    return sparse_matrix_from_hdf5(name,
-                                   hdf5root,
+    return sparse_matrix_from_hdf5('csc',
+                                   __csc_repr__,
+                                   path,
                                    group,
-                                   mode,
-                                   matrix_type = 'csc',
-                                   representation = __csc_repr__)
+                                   name,
+                                   mode)
